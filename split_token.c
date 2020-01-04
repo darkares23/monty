@@ -39,7 +39,7 @@ char **split_str(char *str, const char *delim)
 	{
 		token_list[i] = malloc(sizeof(char) * ((strlen(token)) + 1));
 		if (token_list[i] == NULL)
-			myfree(token_list);
+			token_free(token_list);
 		strcpy(token_list[i], token);
 		i++;
 		token = strtok(NULL, delim);

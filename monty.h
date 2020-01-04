@@ -3,10 +3,14 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
-#define DELIMS " \t\n"
+#define DELIMS " \t\r\a"
 #define STACK 0
 #define QUEUE 1
+extern char **tokens_op;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -38,10 +42,10 @@ typedef struct instruction_s
         void (*func)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-extern char **tokens_op;
 
 int monty_exe(FILE *fd);
 char **split_str(char *str, const char *delim);
+int check_mode(stack_t *stack);
 
 /* OP code functions*/
 void _push(stack_t **stack, unsigned int linenum);
@@ -51,5 +55,7 @@ void _pall(stack_t **stack, unsigned int linenum);
 int use_err(void);
 
 /*Helpers*/
-void myfree(char **pp);
+void token_free(char **pp);
+void stack_free(stack_t **stack);
+unsigned int tokens_len(void);
 #endif

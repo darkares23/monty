@@ -17,12 +17,15 @@ int main(int argc, char **argv)
 
 	fd = fopen(argv[1], "r");
 
-	/*if (!fd)
-		return (file_open_err(argv[1])); */
+	if (!fd)
+	{
+		printf("no file error");
+		return (EXIT_FAILURE);
+	}
 
 	exit_status = monty_exe(fd);
 
 	fclose(fd);
-
+	printf("exit sta %i\n", exit_status);
 	return (exit_status);
 }
