@@ -6,7 +6,7 @@
  */
 void _push(stack_t **stack, unsigned int linenum)
 {
-	stack_t *new;
+	stack_t *new, *tmp;
 	int i;
 
 	new = malloc(sizeof(stack_t));
@@ -33,18 +33,24 @@ void _push(stack_t **stack, unsigned int linenum)
 	new->n = atoi(tokens_op[1]);
 	if (check_mode(*stack) == STACK) /* STACK mode insert at front */
 	{
-		printf("check\n");
-		if (*stack == NULL)
-			*stack = new;
-		else
-		{
-			printf("aca2\n");
-			(*stack)->prev = new;
-			new->next = *stack;
-			*stack = new;
-			(*stack)->prev = NULL;
-		}
+		printf("aca2\n");
+		tmp = (*stack)->next;
+		new->prev = *stack;
+		new->next = tmp;
+		if (tmp)
+			tmp->prev = new;
+		(*stack)->next = new;
 	}
+	else
+	{
+		tmp = *stack;
+		while (tmp->next)
+			tmp = tmp->next;
+		new->prev = tmp;
+		new->next = NULL;
+		tmp->next = new;
+	}
+	
 }
 
 /**
