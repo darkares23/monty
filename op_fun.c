@@ -110,7 +110,7 @@ void _swap(stack_t **stack, unsigned int linenum)
 	}
 	else
 	{
-		printf("L<%d>: can't swap, stack empty\n", linenum);
+		fprintf(stderr, "L%d: can't swap, stack too short\n", linenum);
 		free_head(head);
 		exit(EXIT_FAILURE);
 	}
