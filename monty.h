@@ -59,6 +59,7 @@ void _swap(stack_t **stack, unsigned int linenum);
 /* Error functions*/
 int use_err(void);
 int malloc_err(void);
+int no_int_error(unsigned int lines);
 int unknown_op_error(char *opcode, unsigned int line_number);
 
 /*Helpers*/

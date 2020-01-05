@@ -12,12 +12,12 @@ void _push(stack_t **stack, unsigned int linenum)
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{
-		printf("error %i", linenum);
+		malloc_err();
 		return;
 	}
 	if (tokens_op[1] == NULL)
 	{
-		printf("error %i", linenum);
+		malloc_err();
 		return;
 	}
 	for (i = 0; tokens_op[1][i]; i++)
