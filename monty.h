@@ -47,6 +47,7 @@ void (*func)(stack_t **stack, unsigned int line_number);
 int monty_exe(FILE *fd);
 char **split_str(char *str, const char *delim);
 int check_mode(stack_t *stack);
+int init_stack(stack_t **stack);
 
 /* OP code functions*/
 void _push(stack_t **stack, unsigned int linenum);

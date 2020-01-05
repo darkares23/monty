@@ -43,7 +43,8 @@ int monty_exe(FILE *fd)
 	size_t len = 0, exit_status = EXIT_SUCCESS;
 	void (*op_f)(stack_t **h, unsigned int lineNumber);
 
-	new = malloc(sizeof(stack_t));
+	if (init_stack(&new) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	if (!new)
 		return (malloc_err());
 	while (getline(&buffer, &len, fd) != EOF)

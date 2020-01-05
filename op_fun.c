@@ -31,8 +31,6 @@ void _push(stack_t **stack, unsigned int linenum)
 		}
 	}
 	new->n = atoi(tokens_op[1]);
-	new->prev = NULL;
-	new->next = NULL;
 	if (check_mode(*stack) == STACK) /* STACK mode insert at front */
 	{
 		tmp = (*stack)->next;
@@ -41,6 +39,12 @@ void _push(stack_t **stack, unsigned int linenum)
 		if (tmp)
 			tmp->prev = new;
 		(*stack)->next = new;
+	}
+	else /* QUEUE mode insert at end */
+	{
+		tmp = *stack;
+		while (tmp->next)
+			tmp = tmp->next, new->prev = tmp, new->next = NULL, tmp->next = new;
 	}
 }
 
@@ -72,7 +76,7 @@ void _pint(stack_t **stack, unsigned int linenum)
 
 	if ((*stack)->next == NULL)
 	{
-		printf("L<line_number>: can't pint, stack empty %i");
+		printf("L<line_number>: can't pint, stack empty");
 		return;
 	}
 	printf("%d\n", (*stack)->next->n);
@@ -86,12 +90,12 @@ void _pint(stack_t **stack, unsigned int linenum)
 void _pop(stack_t **stack, unsigned int linenum)
 {
 	stack_t *next = NULL;
-	
+
 	(void)linenum;
 
 	if ((*stack)->next == NULL)
 	{
-		printf("L<line_number>: can't pop, stack empty %i");
+		printf("L<line_number>: can't pop, stack empty");
 		return;
 	}
 
@@ -115,7 +119,7 @@ void _swap(stack_t **stack, unsigned int linenum)
 
 	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
 	{
-		printf("L<line_number>: can't swap, stack empty %i");
+		printf("L<line_number>: can't swap, stack empty");
 		return;
 	}
 

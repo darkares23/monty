@@ -9,7 +9,6 @@
 
 int main(int argc, char **argv)
 {
-	int exit_status = EXIT_SUCCESS;
 	FILE *fd = NULL;
 
 	if (argc != 2)
@@ -19,12 +18,12 @@ int main(int argc, char **argv)
 
 	if (!fd)
 	{
-		fprintf(stderr, "Error: Can't open file %s\n", fd);
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		return (EXIT_FAILURE);
 	}
 
-	exit_status = monty_exe(fd);
+	monty_exe(fd);
 
 	fclose(fd);
-	return (exit_status);
+	return (0);
 }
