@@ -31,14 +31,15 @@ void stack_free(stack_t **stack)
 }
 
 /**
- * tokens_len - Gets the len of tokens_op.
- * Return: Len.
+ * head_free - frees head of linked list
+ * @head: pointer to head
  */
-unsigned int tokens_len(void)
+void free_head(stack_t *head)
 {
-	unsigned int len = 0;
-
-	while (tokens_op[len])
-		len++;
-	return (len);
+	if (head)
+	{
+		if (head->next)
+			free_head(head->next);
+		free(head);
+	}
 }

@@ -9,10 +9,8 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-#define DELIMS " \t\r\a"
 #define STACK 0
 #define QUEUE 1
-extern char **tokens_op;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -30,6 +28,7 @@ struct stack_s *prev;
 struct stack_s *next;
 } stack_t;
 
+extern stack_t *head;
 /**
  * struct instruction_s - opcode and its function
  * @opcode: the opcode
@@ -44,9 +43,10 @@ char *opcode;
 void (*func)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-
-int monty_exe(FILE *fd);
-char **split_str(char *str, const char *delim);
+void (*get_op_func(char *opcode))(stack_t**, unsigned int);
+void op_validation(char *buff, char *monty_opcode, int line_number);
+void monty_exe(FILE *fd);
+void split_str(char *str, int linenum);
 int check_mode(stack_t *stack);
 int init_stack(stack_t **stack);
 
@@ -64,9 +64,10 @@ int malloc_err(void);
 int no_int_error(unsigned int lines);
 int unknown_op_error(char *opcode, unsigned int line_number);
 int open_file_err(char *argv);
+int push_err(int linenum);
 
 /*Helpers*/
+void free_head(stack_t *head);
 void token_free(char **pp);
 void stack_free(stack_t **stack);
-unsigned int tokens_len(void);
 #endif

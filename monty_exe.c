@@ -1,7 +1,5 @@
 #include "monty.h"
 
-char **tokens_op = NULL;
-
 /**
  * get_op_func - search the code with its function.
  * @opcode: The func code.
@@ -35,46 +33,16 @@ void (*get_op_func(char *opcode))(stack_t**, unsigned int)
  * Return: EXIT_SUCCESS on success, respective error code on failure.
  */
 
-int monty_exe(FILE *fd)
+void monty_exe(FILE *fd)
 {
-	stack_t *new = NULL;
-	char *buffer = NULL;
-	unsigned int lines = 0, prev_line = 0;
-	size_t len = 0, exit_status = EXIT_SUCCESS;
-	void (*op_f)(stack_t **h, unsigned int lineNumber);
+	char *lineprt = NULL;
+	size_t n = 0;
+	int line_number = 1;
 
-	if (init_stack(&new) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-
-	while (getline(&buffer, &len, fd) != EOF)
+	while (getline(&lineprt, &n, fd) != EOF)
 	{
-		lines++, tokens_op = split_str(buffer, DELIMS);
-		if (!tokens_op)
-			return (malloc_err());
-		op_f = get_op_func(tokens_op[0]);
-		if (!op_f)
-		{
-			token_free(tokens_op), stack_free(&new);
-			exit_status = unknown_op_error(tokens_op[0], lines);
-			break;
-		}
-		prev_line = tokens_len(), op_f(&new, lines);
-		if (tokens_len() != prev_line)
-		{
-			if (tokens_op && tokens_op[prev_line])
-				exit_status = atoi(tokens_op[prev_line]);
-			else
-				exit_status = EXIT_FAILURE;
-			break;
-		}
-		token_free(tokens_op);
+		split_str(lineprt, line_number);
+		line_number++;
 	}
-	stack_free(&new);
-	if (buffer == 0)
-	{
-		free(buffer);
-		return (EXIT_FAILURE);
-	}
-	free(buffer);
-	return (exit_status);
+	free(lineprt);
 }

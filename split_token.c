@@ -1,50 +1,57 @@
 #include "monty.h"
+stack_t *head = NULL;
 /**
  *split_str - Function to copy
  *@str: edited variable
  *@delim: edited variable
  *Return: always 0
  */
-char **split_str(char *str, const char *delim)
+void split_str(char *str, int linenum)
 {
-	int len = 0, numLetters = 0, i = 0;
-	char **token_list = NULL;
-	char *tempStr = NULL;
-	char *token = NULL;
+	char *opcode, *buff, *delim;
 
-	tempStr = malloc(sizeof(char *) + strlen(str));
-	if (tempStr == NULL)
+	delim = "\n \t";
+	opcode = strtok(str, delim);
+	buff = strtok(NULL, delim);
+
+	if (opcode != NULL)
 	{
-		perror("Error");
-		free(tempStr);
+		if (opcode[0] == '#')
+			return;
+		op_validation(buff, opcode, linenum);
 	}
-	/*letters count*/
-	while (str[len] != '\0')
+}
+
+void op_validation(char *buff, char *monty_opcode, int line_number)
+{
+	void (*op_f)(stack_t **, unsigned int);
+	int signo = 1, j = 0;
+	unsigned int int_value = 0;
+
+	op_f = get_op_func(monty_opcode);
+	if (op_f)
 	{
-		if (str[len] == '\n')
-			str[len] = '\0';
-		if (str[len] != delim[0])
-			numLetters++;
-		len++;
+		if (strcmp(monty_opcode, "push") == 0)
+		{
+			if (buff == NULL)
+				push_err(line_number);
+			else if (buff[0] == '-')
+			{
+				buff = buff + 1;
+				signo = (signo * -1);
+			}
+			while (buff[j])
+			{
+				if (isdigit(buff[j]) == 0)
+					push_err(line_number);
+				j++;
+			}
+			int_value = atoi(buff) * signo;
+			op_f(&head, int_value);
+		}
+		else
+			op_f(&head, line_number);
+		return;
 	}
-	tempStr = strcpy(tempStr, str);
-	token_list = malloc((sizeof(char *) * (numLetters + 1)));
-	if (token_list == NULL)
-	{
-		perror("Error");
-		free(token_list);
-	}
-	token = strtok(tempStr, DELIMS);
-	while (token)
-	{
-		token_list[i] = malloc(sizeof(char) * ((strlen(token)) + 1));
-		if (token_list[i] == NULL)
-			token_free(token_list);
-		strcpy(token_list[i], token);
-		i++;
-		token = strtok(NULL, delim);
-	}
-	token_list[i] = NULL;
-	free(tempStr);
-	return (token_list);
+	unknown_op_error(monty_opcode, line_number);
 }

@@ -26,7 +26,9 @@ int main(int argc, char **argv)
 	}
 
 	monty_exe(fd);
-
 	fclose(fd);
+
+	free_head(head);
+
 	return (exit_status);
 }

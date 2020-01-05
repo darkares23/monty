@@ -53,3 +53,13 @@ int open_file_err(char *argv)
 	fprintf(stderr, "Error: Can't open file %d\n", argv[1]);
 	return (EXIT_FAILURE);
 }
+/**
+ * push_err - invalid _push arg error.
+ * @argv: Line number in Monty bytecodes file where error occurred.
+ * Return: (EXIT_FAILURE).
+ */
+int push_err(int linenum)
+{
+	fprintf(stderr, "L%d: usage: push integer\n", linenum);
+	return (EXIT_FAILURE);
+}
