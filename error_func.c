@@ -42,3 +42,14 @@ int no_int_error(unsigned int lines)
 	fprintf(stderr, "L%u: usage: push integer\n", lines);
 	return (EXIT_FAILURE);
 }
+
+/**
+ * open_file_err - invalid _push arg error.
+ * @lines: Line number in Monty bytecodes file where error occurred.
+ * Return: (EXIT_FAILURE).
+ */
+int open_file_err(char *argv)
+{
+	fprintf(stderr, "Error: Can't open file %d\n", argv[1]);
+	return (EXIT_FAILURE);
+}

@@ -9,10 +9,13 @@
 
 int main(int argc, char **argv)
 {
+	int exit_status = EXIT_SUCCESS;
 	FILE *fd = NULL;
 
 	if (argc != 2)
 		return (use_err());
+	if (access(argv[1], R_OK) == -1)
+		open_file_err(argv[1]);
 
 	fd = fopen(argv[1], "r");
 
@@ -25,5 +28,5 @@ int main(int argc, char **argv)
 	monty_exe(fd);
 
 	fclose(fd);
-	return (0);
+	return (exit_status);
 }
