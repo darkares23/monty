@@ -12,30 +12,39 @@ void _push(stack_t **stack, unsigned int linenum)
 	new_node = malloc(sizeof(stack_t));
 	if (new_node == NULL)
 		malloc_err();
+
 	new_node->n = linenum;
 	new_node->next = *stack;
 	new_node->prev = NULL;
+
 	if (current != NULL)
+	{
 		current->prev = new_node;
-	*stack = new_node;
+	}
+	head = new_node;
 }
 
 /**
- * _pall - Prints the values of a stack_t linked list.
+ * _pall - Prints the values all stack.
  * @stack: A pointer to the top
  * @linenum: line number.
 */
 
 void _pall(stack_t **stack, unsigned int linenum)
 {
-	stack_t *tmp = (*stack)->next;
+	stack_t *tmp_node;
 
-	while (tmp)
-	{
-		printf("%d\n", tmp->n);
-		tmp = tmp->next;
-	}
 	(void)linenum;
+
+	if (stack != NULL)
+	{
+		tmp_node = *stack;
+		while (tmp_node != NULL)
+		{
+			printf("%d\n", tmp_node->n);
+			tmp_node = tmp_node->next;
+		}
+	}
 }
 /**
  * _pint - Prints the top value of a stack_t.

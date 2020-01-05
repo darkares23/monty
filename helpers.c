@@ -31,7 +31,7 @@ void stack_free(stack_t **stack)
 }
 
 /**
- * head_free - frees head of linked list
+ * free_head - frees head of linked list
  * @head: pointer to head
  */
 void free_head(stack_t *head)

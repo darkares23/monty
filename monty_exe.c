@@ -35,14 +35,14 @@ void (*get_op_func(char *opcode))(stack_t**, unsigned int)
 
 void monty_exe(FILE *fd)
 {
-	char *lineprt = NULL;
+	char *buff = NULL;
 	size_t n = 0;
 	int line_number = 1;
 
-	while (getline(&lineprt, &n, fd) != EOF)
+	while (getline(&buff, &n, fd) != EOF)
 	{
-		split_str(lineprt, line_number);
+		split_str(buff, line_number);
 		line_number++;
 	}
-	free(lineprt);
+	free(buff);
 }
