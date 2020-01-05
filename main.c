@@ -39,7 +39,7 @@ void split_str(char *str, int linenum)
 {
 	char *opcode, *buff, *delim;
 
-	delim = "\n ";
+	delim = "\n \t";
 	opcode = strtok(str, delim);
 	buff = strtok(NULL, delim);
 

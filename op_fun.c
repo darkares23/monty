@@ -53,14 +53,13 @@ void _pall(stack_t **stack, unsigned int linenum)
  */
 void _pint(stack_t **stack, unsigned int linenum)
 {
-	(void)linenum;
+	stack_t *tmp_node;
 
-	if ((*stack)->next == NULL)
-	{
-		printf("L<line_number>: can't pint, stack empty\n");
-		return;
-	}
-	printf("%d\n", (*stack)->next->n);
+	tmp_node = *stack;
+	if (*stack != NULL)
+		printf("%i\n", tmp_node->n);
+	else
+		pint_err(linenum);
 }
 
 /**
@@ -76,8 +75,8 @@ void _pop(stack_t **stack, unsigned int linenum)
 
 	if ((*stack)->next == NULL)
 	{
-		printf("L<line_number>: can't pop, stack empty\n");
-		return;
+		printf("L<%d>: can't pop, stack empty\n", linenum);
+		exit(EXIT_FAILURE);
 	}
 
 	next = (*stack)->next->next;
@@ -100,8 +99,8 @@ void _swap(stack_t **stack, unsigned int linenum)
 
 	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
 	{
-		printf("L<line_number>: can't swap, stack empty\n");
-		return;
+		printf("L<%d>: can't swap, stack empty\n", linenum);
+		exit(EXIT_FAILURE);
 	}
 
 	tmp = (*stack)->next->next;

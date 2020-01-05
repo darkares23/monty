@@ -21,3 +21,14 @@ int push_err(int linenum)
 	free_head(head);
 	exit(EXIT_FAILURE);
 }
+/**
+ * pint_err - invalid _push arg error.
+ * @linenum: Line number in Monty bytecodes file where error occurred.
+ * Return: (EXIT_FAILURE).
+ */
+int pint_err(int linenum)
+{
+	fprintf(stderr, "L%d: can't pint, stack empty\n", linenum);
+	free_head(head);
+	exit(EXIT_FAILURE);
+}

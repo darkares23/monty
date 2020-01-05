@@ -65,6 +65,7 @@ int no_int_error(unsigned int lines);
 int unknown_op_error(char *opcode, unsigned int line_number);
 int open_file_err(char *argv);
 int push_err(int linenum);
+int pint_err(int linenum);
 
 /*Helpers*/
 void free_head(stack_t *head);
