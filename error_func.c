@@ -45,7 +45,7 @@ int no_int_error(unsigned int lines)
 
 /**
  * open_file_err - invalid _push arg error.
- * @lines: Line number in Monty bytecodes file where error occurred.
+ * @argv: Line number in Monty bytecodes file where error occurred.
  * Return: (EXIT_FAILURE).
  */
 int open_file_err(char *argv)
