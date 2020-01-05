@@ -93,20 +93,20 @@ void _pop(stack_t **stack, unsigned int linenum)
  */
 void _swap(stack_t **stack, unsigned int linenum)
 {
-	stack_t *tmp = *stack;
+	stack_t *tmp_node = *stack;
 	int count = 0, tmp_value = 0;
 
-	while (tmp)
+	while (tmp_node)
 	{
-		tmp = tmp->next;
+		tmp_node = tmp_node->next;
 		count++;
 	}
 	if (count >= 2)
 	{
-		tmp = *stack;
-		tmp_value = tmp->n;
-		tmp->n = tmp->next->n;
-		tmp->next->n = tmp_value;
+		tmp_node = *stack;
+		tmp_value = tmp_node->n;
+		tmp_node->n = tmp_node->next->n;
+		tmp_node->next->n = tmp_value;
 	}
 	else
 	{
