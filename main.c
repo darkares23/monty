@@ -26,6 +26,5 @@ int main(int argc, char **argv)
 	exit_status = monty_exe(fd);
 
 	fclose(fd);
-	printf("exit sta %i\n", exit_status);
 	return (exit_status);
 }

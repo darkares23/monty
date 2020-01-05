@@ -12,6 +12,9 @@ void (*get_op_func(char *opcode))(stack_t**, unsigned int)
 	instruction_t op_funcs[] = {
 		{"push", _push},
 		{"pall", _pall},
+		{"pint", _pint},
+		{"pop", _pop},
+		{"swap", _swap},
 		{NULL, NULL}
 	};
 	int i = 0;
@@ -42,19 +45,12 @@ int monty_exe(FILE *fd)
 
 	new = malloc(sizeof(stack_t));
 	if (!new)
-		return (1);
-
-	new->n = STACK;
-	new->prev = NULL;
-	new->next = NULL;
+		return (EXIT_FAILURE);
 	while (getline(&buffer, &len, fd) != -1)
 	{
-		lines++;
-
-		tokens_op = split_str(buffer, DELIMS);
+		lines++, tokens_op = split_str(buffer, DELIMS);
 		if (!tokens_op)
 			return (EXIT_FAILURE);
-
 		op_f = get_op_func(tokens_op[0]);
 		if (!op_f)
 		{
@@ -71,16 +67,14 @@ int monty_exe(FILE *fd)
 				exit_status = atoi(tokens_op[prev_line]);
 			else
 				exit_status = EXIT_FAILURE;
-			
 			break;
 		}
 		token_free(tokens_op);
-		printf("%i\n", lines);
 	}
 	stack_free(&new);
 	if (buffer == 0)
 	{
-		free(buffer);
+		free(buffer); 
 		return (EXIT_FAILURE);
 	}
 	free(buffer);
