@@ -69,21 +69,22 @@ void _pint(stack_t **stack, unsigned int linenum)
  */
 void _pop(stack_t **stack, unsigned int linenum)
 {
-	stack_t *next = NULL;
+	stack_t *tmp, *del_node;
 
 	(void)linenum;
 
-	if ((*stack)->next == NULL)
+	if ((*stack) == NULL)
 	{
 		printf("L<%d>: can't pop, stack empty\n", linenum);
 		exit(EXIT_FAILURE);
 	}
 
-	next = (*stack)->next->next;
-	free((*stack)->next);
-	if (next)
-		next->prev = *stack;
-	(*stack)->next = next;
+	del_node = *stack;
+	*stack = tmp->next;
+	tmp = tmp->next;
+	if (tmp != NULL)
+		tmp->prev = NULL;
+	free(del_node);
 }
 
 /**
