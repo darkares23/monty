@@ -19,7 +19,7 @@ int main(int argc, char **argv)
 
 	if (!fd)
 	{
-		printf("no file error");
+		fprintf(stderr, "Error: Can't open file %s\n", fd);
 		return (EXIT_FAILURE);
 	}
 

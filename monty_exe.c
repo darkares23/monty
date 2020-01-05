@@ -46,7 +46,7 @@ int monty_exe(FILE *fd)
 	new = malloc(sizeof(stack_t));
 	if (!new)
 		return (malloc_err());
-	while (getline(&buffer, &len, fd) != -1)
+	while (getline(&buffer, &len, fd) != EOF)
 	{
 		lines++, tokens_op = split_str(buffer, DELIMS);
 		if (!tokens_op)

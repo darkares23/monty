@@ -68,9 +68,11 @@ void _pall(stack_t **stack, unsigned int linenum)
  */
 void _pint(stack_t **stack, unsigned int linenum)
 {
+	(void)linenum;
+
 	if ((*stack)->next == NULL)
 	{
-		printf("L<line_number>: can't pint, stack empty %i", linenum);
+		printf("L<line_number>: can't pint, stack empty %i");
 		return;
 	}
 	printf("%d\n", (*stack)->next->n);
@@ -84,10 +86,12 @@ void _pint(stack_t **stack, unsigned int linenum)
 void _pop(stack_t **stack, unsigned int linenum)
 {
 	stack_t *next = NULL;
+	
+	(void)linenum;
 
 	if ((*stack)->next == NULL)
 	{
-		printf("L<line_number>: can't pop, stack empty %i", linenum);
+		printf("L<line_number>: can't pop, stack empty %i");
 		return;
 	}
 
@@ -107,9 +111,11 @@ void _swap(stack_t **stack, unsigned int linenum)
 {
 	stack_t *tmp;
 
+	(void)linenum;
+
 	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
 	{
-		printf("L<line_number>: can't swap, stack empty %i", linenum);
+		printf("L<line_number>: can't swap, stack empty %i");
 		return;
 	}
 
