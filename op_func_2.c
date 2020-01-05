@@ -23,7 +23,7 @@ void _add(stack_t **stack, unsigned int linenum)
 	}
 	else
 	{
-		fprintf(stderr, "L%d: can't add an empty stack\n", linenum);
+		fprintf(stderr, "L%d: can't add, stack too short\n", linenum);
 		free_head(head);
 		exit(EXIT_FAILURE);
 	}
