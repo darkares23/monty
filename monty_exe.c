@@ -45,17 +45,17 @@ int monty_exe(FILE *fd)
 
 	new = malloc(sizeof(stack_t));
 	if (!new)
-		return (EXIT_FAILURE);
+		return (malloc_err());
 	while (getline(&buffer, &len, fd) != -1)
 	{
 		lines++, tokens_op = split_str(buffer, DELIMS);
 		if (!tokens_op)
-			return (EXIT_FAILURE);
+			return (malloc_err());
 		op_f = get_op_func(tokens_op[0]);
 		if (!op_f)
 		{
 			token_free(tokens_op), stack_free(&new);
-			exit_status = EXIT_FAILURE;
+			exit_status = unknown_op_error(tokens_op[0], lines);
 			break;
 		}
 		prev_line = tokens_len(), op_f(&new, lines);

@@ -58,6 +58,8 @@ void _swap(stack_t **stack, unsigned int linenum);
 
 /* Error functions*/
 int use_err(void);
+int malloc_err(void);
+int unknown_op_error(char *opcode, unsigned int line_number);
 
 /*Helpers*/
 void token_free(char **pp);
