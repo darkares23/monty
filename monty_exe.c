@@ -43,6 +43,8 @@ void monty_exe(FILE *fd)
 
 	while (getline(&buff, &n, fd) != EOF)
 	{
+		if (!buff)
+			free(buff);
 		split_str(buff, line_number);
 		line_number++;
 	}

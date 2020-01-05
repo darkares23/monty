@@ -4,7 +4,7 @@
  * @argv: Line number in Monty bytecodes file where error occurred.
  * Return: (EXIT_FAILURE).
  */
-int open_file_err(char *argv)
+void open_file_err(char *argv)
 {
 	fprintf(stderr, "Error: Can't open file %d\n", argv[1]);
 	free_head(head);

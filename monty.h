@@ -65,7 +65,7 @@ int use_err(void);
 int malloc_err(void);
 int no_int_error(unsigned int lines);
 int unknown_op_error(char *opcode, unsigned int line_number);
-int open_file_err(char *argv);
+void open_file_err(char *argv);
 int push_err(int linenum);
 int pint_err(int linenum);
 
