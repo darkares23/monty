@@ -54,13 +54,11 @@ int monty_exe(FILE *fd)
 		op_f = get_op_func(tokens_op[0]);
 		if (!op_f)
 		{
-			token_free(tokens_op);
-			stack_free(&new);
+			token_free(tokens_op), stack_free(&new);
 			exit_status = EXIT_FAILURE;
 			break;
 		}
-		prev_line = tokens_len();
-		op_f(&new, lines);
+		prev_line = tokens_len(), op_f(&new, lines);
 		if (tokens_len() != prev_line)
 		{
 			if (tokens_op && tokens_op[prev_line])
@@ -74,7 +72,7 @@ int monty_exe(FILE *fd)
 	stack_free(&new);
 	if (buffer == 0)
 	{
-		free(buffer); 
+		free(buffer);
 		return (EXIT_FAILURE);
 	}
 	free(buffer);
