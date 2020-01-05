@@ -16,7 +16,7 @@ int use_err(void)
  */
 int malloc_err(void)
 {
-	printf("Error: malloc failed");
+	fprintf(stderr, "Error: malloc failed");
 	free_head(head);
 	exit(EXIT_FAILURE);
 }
