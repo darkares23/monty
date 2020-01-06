@@ -104,9 +104,11 @@ void _div(stack_t **stack, unsigned int linenum)
 		_pop(stack, linenum);
 	}
 	else
-	fprintf(stderr, "L%d: can't div, stack too short\n", linenum);
-	free_head(head);
-	exit(EXIT_FAILURE);
+	{
+		fprintf(stderr, "L%d: can't mul, stack too short\n", linenum);
+		free_head(head);
+		exit(EXIT_FAILURE);
+	}
 }
 /**
  *_mul - Prints all the elements of the stack
@@ -138,7 +140,9 @@ void _mul(stack_t **stack, unsigned int linenum)
 		_pop(stack, linenum);
 	}
 	else
+	{
 	fprintf(stderr, "L%d: can't mul, stack too short\n", linenum);
 	free_head(head);
 	exit(EXIT_FAILURE);
+	}
 }
