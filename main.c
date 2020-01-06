@@ -53,20 +53,20 @@ void split_str(char *str, int linenum)
 /**
  *op_validation - Function to copy
  *@buff: edited variable
- *@monty_opcode: edited variable
+ *@_opcode: edited variable
  *@line_number: line
  *Return: always 0
  */
-void op_validation(char *buff, char *monty_opcode, int line_number)
+void op_validation(char *buff, char *_opcode, int line_number)
 {
 	void (*op_f)(stack_t **, unsigned int);
 	int signo = 1, j = 0;
 	unsigned int int_value = 0;
 
-	op_f = get_op_func(monty_opcode);
+	op_f = get_op_func(_opcode);
 	if (op_f)
 	{
-		if (strcmp(monty_opcode, "push") == 0)
+		if (strcmp(_opcode, "push") == 0)
 		{
 			if (buff == NULL)
 				push_err(line_number);
@@ -88,5 +88,5 @@ void op_validation(char *buff, char *monty_opcode, int line_number)
 			op_f(&head, line_number);
 		return;
 	}
-	unknown_op_error(monty_opcode, line_number);
+	unknown_op_error(_opcode, line_number);
 }

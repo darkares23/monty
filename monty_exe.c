@@ -15,6 +15,7 @@ void (*get_op_func(char *opcode))(stack_t**, unsigned int)
 		{"swap", _swap},
 		{"add", _add},
 		{"nop", _nop},
+		{"sub", _sub},
 		{NULL, NULL}
 	};
 	int i = 0;
@@ -43,8 +44,6 @@ void monty_exe(FILE *fd)
 
 	while (getline(&buff, &n, fd) != EOF)
 	{
-		if (!buff)
-			free(buff);
 		split_str(buff, line_number);
 		line_number++;
 	}

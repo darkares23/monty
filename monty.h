@@ -44,7 +44,7 @@ void (*func)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
 void (*get_op_func(char *opcode))(stack_t**, unsigned int);
-void op_validation(char *buff, char *monty_opcode, int line_number);
+void op_validation(char *buff, char *_opcode, int line_number);
 void monty_exe(FILE *fd);
 void split_str(char *str, int linenum);
 int check_mode(stack_t *stack);
@@ -58,6 +58,7 @@ void _pop(stack_t **stack, unsigned int linenum);
 void _swap(stack_t **stack, unsigned int linenum);
 void _add(stack_t **stack, unsigned int linenum);
 void _nop(stack_t **stack, unsigned int line_number);
+void _sub(stack_t **stack, unsigned int line_number);
 
 
 /* Error functions*/
