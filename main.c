@@ -20,11 +20,7 @@ int main(int argc, char **argv)
 	fd = fopen(argv[1], "r");
 
 	if (!fd)
-	{
-		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		free_head(head);
-		exit(EXIT_FAILURE);
-	}
+		open_file_err(argv[1]);
 
 	monty_exe(fd);
 	fclose(fd);
