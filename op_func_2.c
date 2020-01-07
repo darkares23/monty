@@ -75,7 +75,7 @@ void _sub(stack_t **stack, unsigned int linenum)
 #include "monty.h"
 
 /**
- *div - Prints all the elements of the stack
+ *_div - Prints all the elements of the stack
  * @stack: A pointer to the top
  * @linenum: line number.
  *Return: Nothing
